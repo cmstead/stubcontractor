@@ -3,7 +3,7 @@
     const config = configFactory();
 
     if (isNode) {
-        module.exports = require('dject')(config);
+        module.exports = require('dject').new(config);
     } else {
         window.container = djectFactory(config)
     }
@@ -14,8 +14,11 @@
     const isNode = typeof module !== 'undefined' && typeof module.exports !== undefined;
 
     return {
-        cwd: isNode ? __dirname : '',
-        modulePaths: [],
+        cwd: isNode ? __dirname + '/dependencies' : '',
+        modulePaths: [
+            './',
+            'wrapped-modules'
+        ],
         allowOverride: false,
         eagerLoad: false,
         errorOnModuleDNE: true

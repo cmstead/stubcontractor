@@ -18,14 +18,16 @@
   },
   "homepage": "https://github.com/cmstead/stubcontractor#readme",
   "dependencies": {
+    "approvals": "^2.1.2",
     "dject": "^1.8.1",
+    "esprima": "^4.0.0",
+    "estraverse": "^4.2.0",
     "signet": "^6.6.2"
   },
   "engines": {
     "node": ">=6.0.0"
   },
   "devDependencies": {
-    "approvals": "^2.1.2",
     "approvals-config-factory": "^1.0.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^3.5.0",

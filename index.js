@@ -2,17 +2,23 @@
     let isNode = typeof module !== undefined && typeof module.exports !== undefined
 
     if (isNode) {
-        const signet = require('./signet-types');
-
-        module.exports = moduleFactory(signet);
+        const container = require('./container');
+        module.exports = moduleFactory(container);
     } else if (typeof signet === 'object') {
-        window.stubcontractor = moduleFactory(signet);
+        window.stubcontractor = moduleFactory(container);
     } else {
         throw new Error('The module stubcontractor requires Signet to run.');
     }
 
-})(function (signet) {
+})(function (container) {
     'use strict';
 
+    return function () {
+        const stubcontract = container.build('stubcontractFactory')();
 
+        return {
+            getApiEndpoints: stubcontract.getApiEndpoints,
+            register: stubcontract.register
+        };
+    };
 });

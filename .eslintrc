@@ -20,6 +20,9 @@
         "before": false,
         "after": false,
         "beforeEach": false,
-        "afterEach": false
+        "afterEach": false,
+
+        "signet": false,
+        "container": false
     }
 }

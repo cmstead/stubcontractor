@@ -1,0 +1,3 @@
+{
+    "noArguments": "Function: anonymous function"
+}
