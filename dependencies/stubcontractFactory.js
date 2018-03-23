@@ -44,7 +44,19 @@
                 .reduce(addFunction, {});
         }
 
+        function buildFunctionFake(fn) {
+            const functionSpec = {
+                name: fn.name,
+                argumentCount: fn.length
+            };
+
+            return buildFunction(functionSpec);
+        }
+
         return {
+            buildFunctionFake: signet.enforce(
+                'originalFunction: function => functionFake: function',
+                buildFunctionFake),
             register: signet.enforce(
                 'moduleName: string, source: string => undefined',
                 register),

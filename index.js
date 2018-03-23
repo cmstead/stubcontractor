@@ -17,6 +17,7 @@
         const stubcontract = container.build('stubcontractFactory')();
 
         return {
+            buildFunctionFake: stubcontract.buildFunctionFake,
             getApiEndpoints: stubcontract.getApiEndpoints,
             register: stubcontract.register
         };

@@ -1,0 +1,3 @@
+{
+    "objectMethod": "Function: anonymous function"
+}

@@ -1,0 +1,3 @@
+{
+    "classFunction": "Function: anonymous function"
+}
