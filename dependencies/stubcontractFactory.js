@@ -23,25 +23,27 @@
 
         function buildFunction(functionSpec) {
             return function () {
-                if(arguments.length !== functionSpec.argumentCount) {
+                if (arguments.length !== functionSpec.argumentCount) {
                     const message = `Function ${functionSpec.name} was called with ${arguments.length} arguments but expected ${functionSpec.argumentCount}`;
                     throw new Error(message);
                 }
             };
         }
 
+        function addFunctionTo(functionSpecs) {
+            return function addFunction(result, key) {
+                result[key] = buildFunction(functionSpecs[key]);
+                return result;
+            }
+        }
+
         function getApiEndpoints(moduleName, functionNames) {
             const source = registry[moduleName];
             const functionSpecs = sourceReader.readFunctions(source, functionNames);
 
-            function addFunction(result, key) {
-                result[key] = buildFunction(functionSpecs[key]);
-                return result;  
-            }
-
             return Object
                 .keys(functionSpecs)
-                .reduce(addFunction, {});
+                .reduce(addFunctionTo(functionSpecs), {});
         }
 
         function buildFunctionFake(fn) {
