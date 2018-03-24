@@ -8,13 +8,14 @@
     }
 
 })(function stubcontractFactory(
+    fileLoaderFactory,
     signet,
     sourceReader
 ) {
 
     'use strict';
 
-    return function () {
+    return function (fileLoader) {
         let registry = {};
 
         function register(moduleName, source) {
@@ -22,12 +23,29 @@
         }
 
         function buildFunction(functionSpec) {
-            return function () {
+            let localVars = {
+                callable: function () { }
+            };
+
+            function fakeFunction(...args) {
                 if (arguments.length !== functionSpec.argumentCount) {
                     const message = `Function ${functionSpec.name} was called with ${arguments.length} arguments but expected ${functionSpec.argumentCount}`;
                     throw new Error(message);
                 }
+
+                localVars.callable.apply(null, args);
+            }
+
+            fakeFunction.onCall = function (callable) {
+                if (typeof callable === 'function') {
+                    localVars.callable = callable;
+                } else {
+                    const setCallableMessage = `Cannot register ${callable} as function to call from function ${functionSpec.name}`;
+                    throw new Error(setCallableMessage);
+                }
             };
+
+            return fakeFunction;
         }
 
         function addFunctionTo(functionSpecs) {
@@ -37,8 +55,16 @@
             }
         }
 
+        function getModuleFromRegistry(moduleName) {
+            if(typeof registry[moduleName] === 'undefined') {
+                registry[moduleName] = fileLoader.loadSource(moduleName);
+            }
+
+            return registry[moduleName];
+        }
+
         function getApiEndpoints(moduleName, functionNames) {
-            const source = registry[moduleName];
+            const source = getModuleFromRegistry(moduleName);
             const functionSpecs = sourceReader.readFunctions(source, functionNames);
 
             return Object

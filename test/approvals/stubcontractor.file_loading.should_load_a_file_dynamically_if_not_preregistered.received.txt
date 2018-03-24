@@ -1,0 +1,7 @@
+{
+    "noArguments": "Function: fakeFunction",
+    "oneArgument": "Function: fakeFunction",
+    "assignedFunctionExpression": "Function: fakeFunction",
+    "lateAssignedFunctionExpression": "Function: fakeFunction",
+    "arrowFunctionExpression": "Function: fakeFunction"
+}

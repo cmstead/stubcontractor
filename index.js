@@ -13,8 +13,9 @@
 })(function (container) {
     'use strict';
 
-    return function () {
-        const stubcontract = container.build('stubcontractFactory')();
+    return function (config) {
+        const fileLoader = container.build('fileLoaderFactory')(config);
+        const stubcontract = container.build('stubcontractFactory')(fileLoader);
 
         return {
             buildFunctionFake: stubcontract.buildFunctionFake,

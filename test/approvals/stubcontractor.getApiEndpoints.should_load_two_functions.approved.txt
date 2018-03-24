@@ -1,4 +1,4 @@
 {
-    "noArguments": "Function: anonymous function",
-    "oneArgument": "Function: anonymous function"
+    "noArguments": "Function: fakeFunction",
+    "oneArgument": "Function: fakeFunction"
 }
