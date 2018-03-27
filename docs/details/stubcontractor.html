@@ -445,6 +445,33 @@
         </pre>
     </li>
 </ul>
+<ul>
+    <li>
+        <strong>should throw an error when a file cannot be loaded</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const badModuleLoader &#x3D; () &#x3D;&gt; stubcontractor.getApiEndpoints(&#x27;api-fixture-bad&#x27;, [
+                &#x27;noArguments&#x27;,
+                &#x27;oneArgument&#x27;,
+                &#x27;assignedFunctionExpression&#x27;,
+                &#x27;lateAssignedFunctionExpression&#x27;,
+                &#x27;arrowFunctionExpression&#x27;
+            ]);
+
+            const message &#x3D; &#x27;Cannot load api-fixture-bad, it does not exist in known file paths&#x27;;
+            assert.throws(badModuleLoader, message);
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
     </ul>
 </li>
 </ul>

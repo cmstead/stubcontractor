@@ -23,6 +23,6 @@
         "afterEach": false,
 
         "signet": false,
-        "container": false
+        "stubcontractorContainer": false
     }
 }

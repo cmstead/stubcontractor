@@ -4,7 +4,7 @@
     if (isNode) {
         module.exports = moduleFactory;
     } else {
-        window.container.register(moduleFactory)
+        window.stubcontractorContainer.register(moduleFactory)
     }
 
 })(function astNodeHelper(signet) {

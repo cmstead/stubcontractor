@@ -5,7 +5,7 @@
     if (isNode) {
         module.exports = require('dject').new(config);
     } else {
-        window.container = djectFactory(config)
+        window.stubcontractorContainer = djectFactory(config)
     }
 
 })(function () {

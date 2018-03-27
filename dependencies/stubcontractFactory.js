@@ -4,7 +4,7 @@
     if (isNode) {
         module.exports = moduleFactory;
     } else {
-        window.container.register(moduleFactory)
+        window.stubcontractorContainer.register(moduleFactory)
     }
 
 })(function stubcontractFactory(
@@ -37,8 +37,14 @@
         }
 
         function getModuleFromRegistry(moduleName) {
-            if(typeof registry[moduleName] === 'undefined') {
-                registry[moduleName] = fileLoader.loadSource(moduleName);
+            if (typeof registry[moduleName] === 'undefined') {
+                const loadedModule = fileLoader.loadSource(moduleName);
+
+                if(typeof loadedModule === 'string') {
+                    registry[moduleName] = loadedModule;
+                } else {
+                    throw new Error(`Cannot load ${moduleName}, it does not exist in known file paths`);
+                }
             }
 
             return registry[moduleName];

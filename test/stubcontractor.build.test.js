@@ -38,7 +38,6 @@ describe('stubcontractor', function () {
             this.verify(prettyJson(apiStub));
         });
 
-
         it('should load a variable-assigned function expression', function () {
             const apiStub = stubcontractor.getApiEndpoints('api-fixture', ['assignedFunctionExpression']);
 
@@ -150,7 +149,6 @@ describe('stubcontractor', function () {
         
     });
 
-
     describe('functionFake.onCall', function () {
         let stubcontractor;
 
@@ -186,7 +184,6 @@ describe('stubcontractor', function () {
 
 
     });
-
     
     describe('functionFake.getOnCallAction', function () {
         
@@ -209,7 +206,6 @@ describe('stubcontractor', function () {
         });
 
     });
-    
 
     describe('file loading', function () {
         let stubcontractor;
@@ -236,6 +232,21 @@ describe('stubcontractor', function () {
 
             this.verify(prettyJson(apiFake));
         });
+
+        
+        it('should throw an error when a file cannot be loaded', function () {
+            const badModuleLoader = () => stubcontractor.getApiEndpoints('api-fixture-bad', [
+                'noArguments',
+                'oneArgument',
+                'assignedFunctionExpression',
+                'lateAssignedFunctionExpression',
+                'arrowFunctionExpression'
+            ]);
+
+            const message = 'Cannot load api-fixture-bad, it does not exist in known file paths';
+            assert.throws(badModuleLoader, message);
+        });
+        
 
     });
 

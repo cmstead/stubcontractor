@@ -5,7 +5,10 @@
         const container = require('./container');
         module.exports = moduleFactory(container);
     } else if (typeof signet === 'object') {
-        window.stubcontractor = moduleFactory(container);
+        window.stubcontractor = moduleFactory(stubcontractorContainer);
+        
+        window.stubcontractorContainer = undefined;
+        delete window.stubcontractorContainer;
     } else {
         throw new Error('The module stubcontractor requires Signet to run.');
     }
@@ -14,7 +17,12 @@
     'use strict';
 
     return function (config) {
-        const fileLoader = container.build('fileLoaderFactory')(config);
+        let isNode = typeof module !== undefined && typeof module.exports !== undefined;
+
+        const fileLoader = isNode
+            ? container.build('fileLoaderFactory')(config)
+            : container.build('clientFileLoaderFactory')(config);
+
         const stubcontract = container.build('stubcontractFactory')(fileLoader);
 
         return {
