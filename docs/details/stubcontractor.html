@@ -1,0 +1,458 @@
+<html>
+
+<head>
+    <title>stubcontractor -- Mochadoc Test Documentation</title>
+
+    <link rel="stylesheet" href="../assets/doc-style.css" media="screen">
+    <link rel="stylesheet" href="../assets/github-gist.css" media="screen">
+</head>
+
+<body>
+    <header>
+        <a href="../index.html"><span id="library-name">stubcontractor</span>
+        <span id="subtitle">Mochadoc-Generated Test Documents</span></a>
+    </header>
+
+    <div class="content">
+        <h1>stubcontractor</h1>
+<div>
+    <a href="#" class="collapse-all collapse-link">Collapse All</a>
+</div>
+<ul>
+    <li class="describe-item">
+    <h3>getApiEndpoints</h3>
+    <div><a href="#" class="describe-link collapse-link"></a></div>
+    <ul class="describe-collapsible shown">
+        <ul>
+    <li>
+        <strong>should load a single function</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;noArguments&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should load two functions</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;noArguments&#x27;, &#x27;oneArgument&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should load a variable-assigned function expression</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;assignedFunctionExpression&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should load a variable-assigned function expression which is assigned after declaration</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;lateAssignedFunctionExpression&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should load a variable-assigned lambda expression</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;arrowFunctionExpression&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should load a method in a class</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;classFunction&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should load a method from an object</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;objectMethod&#x27;]);
+
+            this.verify(prettyJson(apiStub));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should not throw an error if function is called correct number of arguments</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;noArguments&#x27;]);
+
+            assert.doesNotThrow(() &#x3D;&gt; apiStub.noArguments());
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should throw an error if function is called with too many arguments</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;noArguments&#x27;]);
+
+            assert.throws(() &#x3D;&gt; apiStub.noArguments(&#x27;oh no!&#x27;));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should throw an error if function is called with too few arguments</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiStub &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [&#x27;oneArgument&#x27;]);
+
+            assert.throws(() &#x3D;&gt; apiStub.oneArgument());
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+    </ul>
+</li>
+<li class="describe-item">
+    <h3>buildFunctionFake</h3>
+    <div><a href="#" class="describe-link collapse-link"></a></div>
+    <ul class="describe-collapsible shown">
+        <ul>
+    <li>
+        <strong>should return a function</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            function test() { }
+
+            const functionFake &#x3D; stubcontractor.buildFunctionFake(test);
+
+            assert.equal(typeof functionFake, &#x27;function&#x27;);
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should enforce required argument count</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            function test(a, b, c) { }
+
+            const functionFake &#x3D; stubcontractor.buildFunctionFake(test);
+
+            const message &#x3D; &#x27;Function test was called with 2 arguments but expected 3&#x27;;
+            assert.throws(() &#x3D;&gt; functionFake(1, 2), message);
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should add a trivial signature to the fake function</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            function test(a, b, c) { }
+
+            const functionFake &#x3D; stubcontractor.buildFunctionFake(test);
+
+            const signature &#x3D; &#x27;arg1: *, arg2: *, arg3: * &#x3D;&gt; result: *&#x27;;
+            assert.equal(functionFake.signature, signature);
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+    </ul>
+</li>
+<li class="describe-item">
+    <h3>buildApiFake</h3>
+    <div><a href="#" class="describe-link collapse-link"></a></div>
+    <ul class="describe-collapsible shown">
+        <ul>
+    <li>
+        <strong>should fake an API with one endpoint</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiFake &#x3D; stubcontractor.buildApiFake({ test: () &#x3D;&gt; {} });
+            const result &#x3D; {
+                apiEndpoints: Object.keys(apiFake),
+                testSignature: apiFake.test.signature
+            };
+
+            this.verify(prettyJson(result));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+    </ul>
+</li>
+<li class="describe-item">
+    <h3>functionFake.onCall</h3>
+    <div><a href="#" class="describe-link collapse-link"></a></div>
+    <ul class="describe-collapsible shown">
+        <ul>
+    <li>
+        <strong>should provide a function the fake function should call when the fake is called</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            function test(a, b, c) { }
+
+            const functionFake &#x3D; stubcontractor.buildFunctionFake(test);
+            const onCallSpy &#x3D; sinon.spy();
+
+            functionFake.onCall(onCallSpy);
+
+            functionFake(1, 2, 3);
+
+            this.verify(prettyJson(onCallSpy.args));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+<ul>
+    <li>
+        <strong>should throw an error if trying to register a non-function</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            function test(a, b, c) { }
+
+            const functionFake &#x3D; stubcontractor.buildFunctionFake(test);
+
+            const message &#x3D; &#x27;Cannot register null as function to call from function test&#x27;;
+            assert.throws(() &#x3D;&gt; functionFake.onCall(null), message);
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+    </ul>
+</li>
+<li class="describe-item">
+    <h3>functionFake.getOnCallAction</h3>
+    <div><a href="#" class="describe-link collapse-link"></a></div>
+    <ul class="describe-collapsible shown">
+        <ul>
+    <li>
+        <strong>returns action provided to onCall method</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const functionFake &#x3D; stubcontractor.buildFunctionFake(function test() {});
+
+            function myAction () {}
+
+            functionFake.onCall(myAction);
+
+            assert.equal(functionFake.getOnCallAction(), myAction);
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+    </ul>
+</li>
+<li class="describe-item">
+    <h3>file loading</h3>
+    <div><a href="#" class="describe-link collapse-link"></a></div>
+    <ul class="describe-collapsible shown">
+        <ul>
+    <li>
+        <strong>should load a file dynamically if not preregistered</strong>
+    </li>
+    <li>File location: <span class="filename">./test/stubcontractor.build.test.js</span></li>
+    <li class="code-sample-wrapper">
+        <div class="code-expand">
+            <a href="#" class="collapse-link"></a>
+        </div>
+        <pre class="code-sample">
+            <code>
+        function () {
+            const apiFake &#x3D; stubcontractor.getApiEndpoints(&#x27;api-fixture&#x27;, [
+                &#x27;noArguments&#x27;,
+                &#x27;oneArgument&#x27;,
+                &#x27;assignedFunctionExpression&#x27;,
+                &#x27;lateAssignedFunctionExpression&#x27;,
+                &#x27;arrowFunctionExpression&#x27;
+            ]);
+
+            this.verify(prettyJson(apiFake));
+        }
+            </code>
+        </pre>
+    </li>
+</ul>
+    </ul>
+</li>
+</ul>
+    </div>
+
+    <script src="../assets/code-collapse.js"></script>
+    <script src="../assets/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>

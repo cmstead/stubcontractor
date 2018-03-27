@@ -114,9 +114,40 @@ describe('stubcontractor', function () {
 
             const message = 'Function test was called with 2 arguments but expected 3';
             assert.throws(() => functionFake(1, 2), message);
-        })
+        });
 
 
+        it('should add a trivial signature to the fake function', function () {
+            function test(a, b, c) { }
+
+            const functionFake = stubcontractor.buildFunctionFake(test);
+
+            const signature = 'arg1: *, arg2: *, arg3: * => result: *';
+            assert.equal(functionFake.signature, signature);
+        });
+
+    });
+
+    describe('buildApiFake', function () {
+        let stubcontractor;
+
+        beforeEach(function () {
+            const config = {};
+
+            stubcontractor = stubcontractorFactory(config);
+        });
+
+        
+        it('should fake an API with one endpoint', function () {
+            const apiFake = stubcontractor.buildApiFake({ test: () => {} });
+            const result = {
+                apiEndpoints: Object.keys(apiFake),
+                testSignature: apiFake.test.signature
+            };
+
+            this.verify(prettyJson(result));
+        });
+        
     });
 
 
@@ -156,6 +187,29 @@ describe('stubcontractor', function () {
 
     });
 
+    
+    describe('functionFake.getOnCallAction', function () {
+        
+        let stubcontractor;
+
+        beforeEach(function () {
+            const config = {};
+
+            stubcontractor = stubcontractorFactory(config);
+        });
+        
+        it('returns action provided to onCall method', function () {
+            const functionFake = stubcontractor.buildFunctionFake(function test() {});
+
+            function myAction () {}
+
+            functionFake.onCall(myAction);
+
+            assert.equal(functionFake.getOnCallAction(), myAction);
+        });
+
+    });
+    
 
     describe('file loading', function () {
         let stubcontractor;

@@ -9,6 +9,7 @@
 
 })(function stubcontractFactory(
     fileLoaderFactory,
+    functionBuilder,
     signet,
     sourceReader
 ) {
@@ -22,35 +23,15 @@
             registry[moduleName] = source;
         }
 
-        function buildFunction(functionSpec) {
-            let localVars = {
-                callable: function () { }
+        function buildApiFake(apiObj) {
+            return {
+                test: buildFunctionFake(apiObj.test)
             };
-
-            function fakeFunction(...args) {
-                if (arguments.length !== functionSpec.argumentCount) {
-                    const message = `Function ${functionSpec.name} was called with ${arguments.length} arguments but expected ${functionSpec.argumentCount}`;
-                    throw new Error(message);
-                }
-
-                localVars.callable.apply(null, args);
-            }
-
-            fakeFunction.onCall = function (callable) {
-                if (typeof callable === 'function') {
-                    localVars.callable = callable;
-                } else {
-                    const setCallableMessage = `Cannot register ${callable} as function to call from function ${functionSpec.name}`;
-                    throw new Error(setCallableMessage);
-                }
-            };
-
-            return fakeFunction;
         }
 
         function addFunctionTo(functionSpecs) {
             return function addFunction(result, key) {
-                result[key] = buildFunction(functionSpecs[key]);
+                result[key] = functionBuilder.buildFunction(functionSpecs[key]);
                 return result;
             }
         }
@@ -78,10 +59,13 @@
                 argumentCount: fn.length
             };
 
-            return buildFunction(functionSpec);
+            return functionBuilder.buildFunction(functionSpec);
         }
 
         return {
+            buildApiFake: signet.enforce(
+                'apiObject: object => object',
+                buildApiFake),
             buildFunctionFake: signet.enforce(
                 'originalFunction: function => functionFake: function',
                 buildFunctionFake),

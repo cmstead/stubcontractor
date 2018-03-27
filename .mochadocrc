@@ -1,0 +1,5 @@
+{
+    "projectName": "stubcontractor",
+    "files": "./test/*.test.js",
+    "dest": "./docs/"
+}
