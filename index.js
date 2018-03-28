@@ -5,10 +5,12 @@
         const container = require('./container');
         module.exports = moduleFactory(container);
     } else if (typeof signet === 'object') {
-        window.stubcontractor = moduleFactory(stubcontractorContainer);
-        
+        const container = window.stubcontractorContainer;
+
         window.stubcontractorContainer = undefined;
         delete window.stubcontractorContainer;
+
+        window.stubcontractor = moduleFactory(container)({});
     } else {
         throw new Error('The module stubcontractor requires Signet to run.');
     }
