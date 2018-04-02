@@ -30,7 +30,10 @@
         return {
             buildApiFake: stubcontract.buildApiFake,
             buildFunctionFake: stubcontract.buildFunctionFake,
+
             getApiEndpoints: stubcontract.getApiEndpoints,
+            getApiFunction: stubcontract.getApiFunction,
+            
             register: stubcontract.register
         };
     };

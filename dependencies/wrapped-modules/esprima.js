@@ -15,6 +15,6 @@
     if (isNode) {
         return require('esprima');
     } else {
-        return esprima;
+        return null;
     }
 });

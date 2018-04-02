@@ -88,6 +88,41 @@ describe('stubcontractor', function () {
 
     });
 
+    describe('getApiFunction', function () {
+        
+        let stubcontractor;
+        let testSource;
+
+        beforeEach(function () {
+            const config = {};
+            stubcontractor = stubcontractorFactory(config);
+
+            testSource = fs.readFileSync(__dirname + '/fixtures/api-fixture.js', { encoding: 'utf8' });
+
+            stubcontractor.register('api-fixture', testSource);
+        });
+        
+        it('should return a fake function from a specified module', function () {
+            const oneArgumentFake = stubcontractor.getApiFunction('api-fixture', 'oneArgument');
+
+            assert.equal(typeof oneArgumentFake, 'function');
+        });
+        
+        it('should throw an error when fake function receives too many arguments', function () {
+            const oneArgumentFake = stubcontractor.getApiFunction('api-fixture', 'oneArgument');
+
+            assert.throws(() => oneArgumentFake(1, 2, 3));
+        });
+        
+        it('should throw an error when fake function receives too few arguments', function () {
+            const oneArgumentFake = stubcontractor.getApiFunction('api-fixture', 'oneArgument');
+
+            assert.throws(() => oneArgumentFake());
+        });
+        
+    });
+    
+
     describe('buildFunctionFake', function () {
 
         let stubcontractor;

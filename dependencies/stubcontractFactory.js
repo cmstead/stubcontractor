@@ -59,6 +59,11 @@
                 .reduce(addFunctionTo(functionSpecs), {});
         }
 
+        function getApiFunction(moduleName, functionName) {
+            const apiObject = getApiEndpoints(moduleName, [functionName]);
+            return apiObject[functionName];
+        }
+
         function buildFunctionFake(fn) {
             const functionSpec = {
                 name: fn.name,
@@ -80,7 +85,10 @@
                 register),
             getApiEndpoints: signet.enforce(
                 'moduleName: string, functionNames: array<string> => apiObject: object',
-                getApiEndpoints)
+                getApiEndpoints),
+            getApiFunction: signet.enforce(
+                'moduleName: string, functionName: string => apiFunction: function',
+                getApiFunction)
         };
     }
 
