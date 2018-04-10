@@ -181,6 +181,48 @@ describe('stubcontractor', function () {
 
             this.verify(prettyJson(result));
         });
+
+        
+        it('should build a fake API with multiple endpoints', function () {
+            const apiObject = {
+                test1: () => {},
+                test2: () => {},
+                test3: () => {}
+            };
+
+            const apiFake = stubcontractor.buildApiFake(apiObject);
+
+            const result = {
+                apiEndpoints: Object.keys(apiFake),
+                apiSignatures: Object.keys(apiFake).map((key) => [
+                    key,
+                    apiFake[key].signature
+                ])
+            };
+
+            this.verify(prettyJson(result));
+        });
+        
+        it('should ignore non-function endpoints', function () {
+            const apiObject = {
+                test1: () => {},
+                test2: 'foo',
+                test3: () => {}
+            };
+
+            const apiFake = stubcontractor.buildApiFake(apiObject);
+
+            const result = {
+                apiEndpoints: Object.keys(apiFake),
+                apiSignatures: Object.keys(apiFake).map((key) => [
+                    key,
+                    apiFake[key].signature
+                ])
+            };
+
+            this.verify(prettyJson(result));
+        });
+        
         
     });
 

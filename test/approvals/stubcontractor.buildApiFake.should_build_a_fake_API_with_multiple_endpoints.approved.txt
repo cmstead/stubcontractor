@@ -1,0 +1,21 @@
+{
+    "apiEndpoints": [
+        "test1",
+        "test2",
+        "test3"
+    ],
+    "apiSignatures": [
+        [
+            "test1",
+            "* => result: *"
+        ],
+        [
+            "test2",
+            "* => result: *"
+        ],
+        [
+            "test3",
+            "* => result: *"
+        ]
+    ]
+}

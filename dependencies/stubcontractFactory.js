@@ -24,9 +24,12 @@
         }
 
         function buildApiFake(apiObj) {
-            return {
-                test: buildFunctionFake(apiObj.test)
-            };
+            return Object.keys(apiObj)
+                .filter(key => typeof apiObj[key] === 'function')
+                .reduce(function (apiFake, key) {
+                    apiFake[key] = buildFunctionFake(apiObj[key]);
+                    return apiFake;
+                }, {});
         }
 
         function addFunctionTo(functionSpecs) {
@@ -40,7 +43,7 @@
             if (typeof registry[moduleName] === 'undefined') {
                 const loadedModule = fileLoader.loadSource(moduleName);
 
-                if(typeof loadedModule === 'string') {
+                if (typeof loadedModule === 'string') {
                     registry[moduleName] = loadedModule;
                 } else {
                     throw new Error(`Cannot load ${moduleName}, it does not exist in known file paths`);
