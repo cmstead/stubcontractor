@@ -216,7 +216,15 @@ describe('stubcontractor', function () {
             assert.throws(() => functionFake.onCall(null), message);
         });
 
+        
+        it('should return function fake', function () {
+            function test(a, b, c) {}
 
+            const functionFake = stubcontractor.buildFunctionFake(test);
+
+            assert.equal(functionFake.onCall(() => {}), functionFake);
+        });
+        
 
     });
     

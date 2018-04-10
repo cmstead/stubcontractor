@@ -46,6 +46,8 @@
                 const setCallableMessage = `Cannot register ${callable} as function to call from function ${functionSpec.name}`;
                 throw new Error(setCallableMessage);
             }
+
+            return fakeFunction;
         };
 
         fakeFunction.getOnCallAction = function () {
