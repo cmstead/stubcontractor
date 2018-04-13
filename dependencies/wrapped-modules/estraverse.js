@@ -15,6 +15,6 @@
     if (isNode) {
         return require('estraverse');
     } else {
-        return estraverse;
+        return null;
     }
 });

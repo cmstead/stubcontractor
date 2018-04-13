@@ -9,8 +9,7 @@
 
 })(function sourceReader(
     astNodeHelper,
-    estraverse,
-    parser
+    estraverse
 ) {
     'use strict';
 
@@ -20,8 +19,7 @@
         isAcceptableFunctionNode
     } = astNodeHelper;
 
-    function functionReader(functionMap, source) {
-        const ast = parser.parse(source);
+    function functionReader(functionMap, ast) {
         const functionDefinitions = {};
 
         estraverse.traverse(ast, {
@@ -48,11 +46,11 @@
         return functionDefinitions;
     }
 
-    function readFunctions(source, functionNames) {
+    function readFunctions(ast, functionNames) {
         const functionMap = functionNames
             .reduce((result, key) => (result[key] = true, result), {});
 
-        const functionDefinitions = functionReader(functionMap, source);
+        const functionDefinitions = functionReader(functionMap, ast);
 
         return functionDefinitions;
     }

@@ -8,7 +8,6 @@
     }
 
 })(function stubcontractFactory(
-    fileLoaderFactory,
     functionBuilder,
     signet,
     sourceReader
@@ -16,12 +15,7 @@
 
     'use strict';
 
-    return function (fileLoader) {
-        let registry = {};
-
-        function register(moduleName, source) {
-            registry[moduleName] = source;
-        }
+    return function (registry) {
 
         function buildApiFake(apiObj) {
             return Object.keys(apiObj)
@@ -39,23 +33,9 @@
             }
         }
 
-        function getModuleFromRegistry(moduleName) {
-            if (typeof registry[moduleName] === 'undefined') {
-                const loadedModule = fileLoader.loadSource(moduleName);
-
-                if (typeof loadedModule === 'string') {
-                    registry[moduleName] = loadedModule;
-                } else {
-                    throw new Error(`Cannot load ${moduleName}, it does not exist in known file paths`);
-                }
-            }
-
-            return registry[moduleName];
-        }
-
         function getApiEndpoints(moduleName, functionNames) {
-            const source = getModuleFromRegistry(moduleName);
-            const functionSpecs = sourceReader.readFunctions(source, functionNames);
+            const sourceAst = registry.getModule(moduleName);
+            const functionSpecs = sourceReader.readFunctions(sourceAst, functionNames);
 
             return Object
                 .keys(functionSpecs)
@@ -83,9 +63,6 @@
             buildFunctionFake: signet.enforce(
                 'originalFunction: function => functionFake: function',
                 buildFunctionFake),
-            register: signet.enforce(
-                'moduleName: string, source: string => undefined',
-                register),
             getApiEndpoints: signet.enforce(
                 'moduleName: string, functionNames: array<string> => apiObject: object',
                 getApiEndpoints),

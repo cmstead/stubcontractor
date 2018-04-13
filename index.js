@@ -25,7 +25,9 @@
             ? container.build('fileLoaderFactory')(config)
             : container.build('clientFileLoaderFactory')(config);
 
-        const stubcontract = container.build('stubcontractFactory')(fileLoader);
+        const registry = container.build('registryFactory')(fileLoader);
+
+        const stubcontract = container.build('stubcontractFactory')(registry);
 
         return {
             buildApiFake: stubcontract.buildApiFake,
@@ -34,7 +36,7 @@
             getApiEndpoints: stubcontract.getApiEndpoints,
             getApiFunction: stubcontract.getApiFunction,
             
-            register: stubcontract.register
+            register: registry.register
         };
     };
 });
