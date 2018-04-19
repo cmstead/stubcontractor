@@ -267,7 +267,16 @@ describe('stubcontractor', function () {
             assert.equal(functionFake.onCall(() => {}), functionFake);
         });
         
+        
+        it('should return internal returned value on call', function () {
+            function test(a, b, c) {}
 
+            const functionFake = stubcontractor.buildFunctionFake(test);
+            functionFake.onCall(() => 93);
+
+            assert.equal(functionFake(1, 2, 3), 93);
+        });
+        
     });
     
     describe('functionFake.getOnCallAction', function () {

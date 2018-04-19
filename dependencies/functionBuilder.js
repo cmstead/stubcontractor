@@ -36,7 +36,7 @@
                 throw new Error(message);
             }
 
-            localVars.callable.apply(null, args);
+            return localVars.callable.apply(null, args);
         }
 
         fakeFunction.onCall = function (callable) {
