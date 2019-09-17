@@ -18,14 +18,10 @@
   },
   "homepage": "https://github.com/cmstead/stubcontractor#readme",
   "dependencies": {
-    "approvals": "^2.1.2",
     "dject": "^1.9.3",
     "esprima": "^4.0.0",
     "estraverse": "^4.2.0",
     "signet": "^6.6.2"
-  },
-  "engines": {
-    "node": ">=6.0.0"
   },
   "devDependencies": {
     "approvals-config-factory": "^1.0.0",
@@ -45,5 +41,8 @@
     "karma-sinon": "^1.0.5",
     "mocha": "^3.4.1",
     "sinon": "^2.2.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }
