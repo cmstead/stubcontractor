@@ -31,11 +31,12 @@
 
         return {
             buildApiFake: stubcontract.buildApiFake,
+            buildApiFakeFromPrototype: stubcontract.buildApiFakeFromPrototype,
             buildFunctionFake: stubcontract.buildFunctionFake,
 
             getApiEndpoints: stubcontract.getApiEndpoints,
             getApiFunction: stubcontract.getApiFunction,
-            
+
             register: registry.register
         };
     };

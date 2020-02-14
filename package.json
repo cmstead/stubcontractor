@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "node ./node_modules/mocha/bin/mocha ./test/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "signet": "^6.6.2"
   },
   "devDependencies": {
+    "approvals": "^3.0.5",
     "approvals-config-factory": "^1.0.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^3.5.0",

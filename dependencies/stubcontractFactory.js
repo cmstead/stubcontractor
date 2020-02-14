@@ -17,6 +17,10 @@
 
     return function (registry) {
 
+        function buildApiFakeFromPrototype(apiObj) {
+            return buildApiFake(Object.getPrototypeOf(apiObj));
+        }
+
         function buildApiFake(apiObj) {
             return Object.keys(apiObj)
                 .filter(key => typeof apiObj[key] === 'function')
@@ -60,6 +64,9 @@
             buildApiFake: signet.enforce(
                 'apiObject: object => object',
                 buildApiFake),
+            buildApiFakeFromPrototype: signet.enforce(
+                'apiObject: object => object',
+                buildApiFakeFromPrototype),
             buildFunctionFake: signet.enforce(
                 'originalFunction: function => functionFake: function',
                 buildFunctionFake),

@@ -89,7 +89,7 @@ describe('stubcontractor', function () {
     });
 
     describe('getApiFunction', function () {
-        
+
         let stubcontractor;
         let testSource;
 
@@ -101,27 +101,27 @@ describe('stubcontractor', function () {
 
             stubcontractor.register('api-fixture', testSource);
         });
-        
+
         it('should return a fake function from a specified module', function () {
             const oneArgumentFake = stubcontractor.getApiFunction('api-fixture', 'oneArgument');
 
             assert.equal(typeof oneArgumentFake, 'function');
         });
-        
+
         it('should throw an error when fake function receives too many arguments', function () {
             const oneArgumentFake = stubcontractor.getApiFunction('api-fixture', 'oneArgument');
 
             assert.throws(() => oneArgumentFake(1, 2, 3));
         });
-        
+
         it('should throw an error when fake function receives too few arguments', function () {
             const oneArgumentFake = stubcontractor.getApiFunction('api-fixture', 'oneArgument');
 
             assert.throws(() => oneArgumentFake());
         });
-        
+
     });
-    
+
 
     describe('buildFunctionFake', function () {
 
@@ -171,9 +171,9 @@ describe('stubcontractor', function () {
             stubcontractor = stubcontractorFactory(config);
         });
 
-        
+
         it('should fake an API with one endpoint', function () {
-            const apiFake = stubcontractor.buildApiFake({ test: () => {} });
+            const apiFake = stubcontractor.buildApiFake({ test: () => { } });
             const result = {
                 apiEndpoints: Object.keys(apiFake),
                 testSignature: apiFake.test.signature
@@ -182,12 +182,12 @@ describe('stubcontractor', function () {
             this.verify(prettyJson(result));
         });
 
-        
+
         it('should build a fake API with multiple endpoints', function () {
             const apiObject = {
-                test1: () => {},
-                test2: () => {},
-                test3: () => {}
+                test1: () => { },
+                test2: () => { },
+                test3: () => { }
             };
 
             const apiFake = stubcontractor.buildApiFake(apiObject);
@@ -202,12 +202,12 @@ describe('stubcontractor', function () {
 
             this.verify(prettyJson(result));
         });
-        
+
         it('should ignore non-function endpoints', function () {
             const apiObject = {
-                test1: () => {},
+                test1: () => { },
                 test2: 'foo',
-                test3: () => {}
+                test3: () => { }
             };
 
             const apiFake = stubcontractor.buildApiFake(apiObject);
@@ -222,8 +222,30 @@ describe('stubcontractor', function () {
 
             this.verify(prettyJson(result));
         });
-        
-        
+
+
+    });
+
+    describe('buildApiFakeFromPrototype', function () {
+        let stubcontractor;
+
+        beforeEach(function () {
+            const config = {};
+
+            stubcontractor = stubcontractorFactory(config);
+        });
+
+        it('creates a fake API from the prototype of an object', function () {
+            function FakeApi() { }
+            FakeApi.prototype = {
+                test1: () => null,
+                test2: () => null
+            };
+
+            const apiFake = stubcontractor.buildApiFakeFromPrototype(new FakeApi());
+
+            assert.equal(Object.keys(apiFake).toString(), 'test1,test2');
+        });
     });
 
     describe('functionFake.onCall', function () {
@@ -258,29 +280,29 @@ describe('stubcontractor', function () {
             assert.throws(() => functionFake.onCall(null), message);
         });
 
-        
+
         it('should return function fake', function () {
-            function test(a, b, c) {}
+            function test(a, b, c) { }
 
             const functionFake = stubcontractor.buildFunctionFake(test);
 
-            assert.equal(functionFake.onCall(() => {}), functionFake);
+            assert.equal(functionFake.onCall(() => { }), functionFake);
         });
-        
-        
+
+
         it('should return internal returned value on call', function () {
-            function test(a, b, c) {}
+            function test(a, b, c) { }
 
             const functionFake = stubcontractor.buildFunctionFake(test);
             functionFake.onCall(() => 93);
 
             assert.equal(functionFake(1, 2, 3), 93);
         });
-        
+
     });
-    
+
     describe('functionFake.getOnCallAction', function () {
-        
+
         let stubcontractor;
 
         beforeEach(function () {
@@ -288,11 +310,11 @@ describe('stubcontractor', function () {
 
             stubcontractor = stubcontractorFactory(config);
         });
-        
-        it('returns action provided to onCall method', function () {
-            const functionFake = stubcontractor.buildFunctionFake(function test() {});
 
-            function myAction () {}
+        it('returns action provided to onCall method', function () {
+            const functionFake = stubcontractor.buildFunctionFake(function test() { });
+
+            function myAction() { }
 
             functionFake.onCall(myAction);
 
@@ -327,7 +349,7 @@ describe('stubcontractor', function () {
             this.verify(prettyJson(apiFake));
         });
 
-        
+
         it('should throw an error when a file cannot be loaded', function () {
             const badModuleLoader = () => stubcontractor.getApiEndpoints('api-fixture-bad', [
                 'noArguments',
@@ -340,7 +362,7 @@ describe('stubcontractor', function () {
             const message = 'Cannot load api-fixture-bad, it does not exist in known file paths';
             assert.throws(badModuleLoader, message);
         });
-        
+
 
     });
 
